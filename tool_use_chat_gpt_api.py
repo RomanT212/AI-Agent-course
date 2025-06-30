@@ -1,6 +1,6 @@
 import openai
 
-# ✅ Nastavení API
+# Nastavení API
 openai.api_key = 'YOUR_OPENAI_API_KEY'
 
 # 🔧 Definice výpočetní funkce
@@ -11,9 +11,9 @@ def calculate(expression: str) -> str:
     except Exception as e:
         return f"Chyba při výpočtu: {e}"
 
-# 🧠 Funkce volající LLM a nástroj
+# Funkce volající LLM a nástroj
 def run_conversation(user_input):
-    # 1️⃣ Pošleme dotaz LLM s instrukcí, aby použil nástroj pokud je třeba
+    # Pošlu dotaz LLM s instrukcí, aby použil nástroj pokud je třeba
     system_message = {
         "role": "system",
         "content": (
@@ -35,7 +35,7 @@ def run_conversation(user_input):
     reply = response.choices[0].message["content"]
     print("LLM odpověď:", reply)
 
-    # 2️⃣ Pokud LLM chce použít nástroj:
+    # Pokud LLM chce použít nástroj:
     if reply.startswith("TOOL:"):
         expression = reply.replace("TOOL:", "").strip()
         tool_result = calculate(expression)
@@ -54,7 +54,7 @@ def run_conversation(user_input):
     else:
         return reply
 
-# 🧪 Test
+# Test
 if __name__ == "__main__":
     user_query = "Kolik je (25 + 17) * 3?"
     result = run_conversation(user_query)
